@@ -5,6 +5,9 @@ import { MyContext } from "@/context/context";
 import { LANGUAGES } from "@/utils/mockData";
 import { FaRegCopy } from "react-icons/fa6";
 import { LuCopyCheck } from "react-icons/lu";
+import { Bounce, toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const AddSnippetSection: React.FC = () => {
   const [showCopyIcon, setShowCopyIcon] = useState(true);
@@ -34,7 +37,17 @@ const AddSnippetSection: React.FC = () => {
       !codeRef.current?.value ||
       !selectedLanguage
     ) {
-      alert("please add data");
+      toast.error('Please Fill all the Data', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+        });
       return false;
     }
     const data = context?.codeSnippet;
@@ -73,6 +86,7 @@ const AddSnippetSection: React.FC = () => {
   return (
     <>
       <section className="w-full flex justify-end">
+      <ToastContainer />
         <section
           className={`shadow-2xl border rounded-lg flex flex-col min-w-[700px] ${
             context?.darkTheme
