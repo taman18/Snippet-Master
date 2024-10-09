@@ -11,7 +11,6 @@ const UsersInfo: React.FC = () => {
     const context = useContext(MyContext);
     const changeTheme = (event: ChangeEvent<HTMLInputElement>) => {
         context?.setDarkTheme((prev:boolean) => !prev);
-        console.log(context?.darkTheme);
     }
     const addSnippet = () => {
         context?.setShowAddSnippetSection(true);

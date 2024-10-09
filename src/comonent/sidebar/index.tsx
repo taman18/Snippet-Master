@@ -4,6 +4,7 @@ import QuickLinks from "./components/quickLinks";
 import { SIDEBAR_ITEMS1, SIDEBAR_ITEMS2 } from "@/utils/mockData";
 import { useContext } from "react";
 import { MyContext } from "@/context/context";
+import LanguageCount from "@/container/languageCount";
 
 const Sidebar: React.FC = () => {
   const context = useContext(MyContext);
@@ -27,6 +28,7 @@ const Sidebar: React.FC = () => {
           <span className="text-[#94A3B8] font-bold text-base p-4">
             Languages
           </span>
+          <LanguageCount />
         </section>
       </section>
     </>
