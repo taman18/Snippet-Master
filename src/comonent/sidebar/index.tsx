@@ -23,7 +23,7 @@ const Sidebar: React.FC = () => {
             <QuickLinks quickLinks={SIDEBAR_ITEMS1} />
           </div>
           <div className="p-4">
-            <QuickLinks quickLinks={SIDEBAR_ITEMS2} />
+            {/* <QuickLinks quickLinks={SIDEBAR_ITEMS2} /> */}
           </div>
           <span className="text-[#94A3B8] font-bold text-base p-4">
             Languages

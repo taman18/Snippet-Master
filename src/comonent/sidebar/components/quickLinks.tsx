@@ -1,6 +1,5 @@
 "use client";
 import { useClerk } from "@clerk/nextjs";
-import { useState } from "react";
 import { useContext } from "react";
 import { MyContext } from "@/context/context";
 
@@ -17,11 +16,24 @@ const QuickLinks: React.FC<QuickLinksProps> = ({ quickLinks }) => {
   const context = useContext(MyContext);
   const { signOut } = useClerk();
 
+  interface SideBar {
+    id: number,
+    title: string,
+    isActive: boolean
+  }
+  
   const handleQuickLinkClick = (item: QuickLink, index: number) => {
+    if (context?.activeLink) {
+      const linkArr: SideBar[] = [...context?.activeLink];
+      linkArr.forEach((item) => {
+        item.isActive = false
+      })
+      linkArr[index].isActive = true;
+      context?.setActiveLink(linkArr);
+    }
     if (item.title === "Logout") {
       return signOut({ redirectUrl: "/" });
     }
-    context?.setActiveLinkIndex(index)
   };
 
   return (
@@ -30,7 +42,7 @@ const QuickLinks: React.FC<QuickLinksProps> = ({ quickLinks }) => {
         <li
           key={item.id}
           className={`${
-            context?.activeLinkIndex === i ? "bg-[#8338EC] text-white" : "text-[#8338EC]"
+            context?.activeLink[i].isActive === true ? "bg-[#8338EC] text-white" : "text-[#8338EC]"
           } py-1 cursor-pointer rounded-lg w-[150px] px-2`}
           onClick={() => handleQuickLinkClick(item, i)}
         >

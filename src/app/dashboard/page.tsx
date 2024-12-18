@@ -25,13 +25,13 @@ const Dashboard: React.FC = () => {
           <UsersInfo />
           <TagsListing />
           <section className="flex bg-[url(https://snippet.utkarsh.app/no-items-found.webp)] bg-no-repeat	h-[600px] bg-center">
-            {!!context?.codeSnippet.length && context.activeLinkIndex === 0 && (
+            {!!context?.codeSnippet.length && context?.activeLink[0].isActive === true  && (
               <CodeSnippetListing data={context?.codeSnippet} />
             )}
-            {!!favouriteData && context?.activeLinkIndex === 1 && (
+            {!!favouriteData && context?.activeLink[1].isActive === true && (
               <CodeSnippetListing data={favouriteData} />
             )}
-            {!!context?.codeSnippet.length && context.activeLinkIndex === 2 && (
+            {!!context?.codeSnippet.length && context?.activeLink[2].isActive === true && (
               <CodeSnippetListing data={context?.trashData} />
             )}
             {context?.showAddSnippetSection && <AddSnippetSection />}

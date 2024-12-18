@@ -7,14 +7,14 @@ export const SNIPPET_MASTER_FEATURES = [
   ];
   
   export const SIDEBAR_ITEMS1 = [
-    {id:0, title: "All Snippets"},
-    {id:1, title: "Favorites"},
-    {id:2, title: "Trash"}
+    {id:0, title: "All Snippets", isActive: true},
+    {id:1, title: "Favorites", isActive: false},
+    {id:2, title: "Trash", isActive: false}
   ]
 
   export const SIDEBAR_ITEMS2 = [
-    {id: 3, title: "Tags"},
-    {id: 4, title: "Logout"}
+    {id: 3, title: "Tags", isActive: false},
+    {id: 4, title: "Logout", isActive: false}
   ]
 
   export const LANGUAGES = [

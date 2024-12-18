@@ -69,6 +69,7 @@ const AddSnippetSection: React.FC = () => {
   const addCodeSnippetbtn = () => {
     if (validateAddSnippetSection()) {
       context?.setShowAddSnippetSection(false);
+      context?.setShowDeleteModal(false);
     }
   };
   const copyText = async () => {

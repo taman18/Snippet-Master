@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { MyContext } from "@/context/context";
 import { FaRegHeart } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import DialogBox from "./diaglogBox";
 
 interface DataProps {
   id: number;
@@ -17,19 +18,12 @@ interface DataProps {
 interface CodeSnippetListingProps {
   data: DataProps[];
 }
+
 const CodeSnippetListing: React.FC<CodeSnippetListingProps> = ({ data }) => {
   const context = useContext(MyContext);
-  const moveToTrash = (id: number) => {
-    const allSnippetData = context?.codeSnippet;
-    if (allSnippetData) {
-      const trashData = context.trashData;
-      const updatedTrash = [...trashData];
-      updatedTrash.push(allSnippetData[id]);
-      const updatedSnippetData = [...allSnippetData];
-      updatedSnippetData.splice(id, 1);
-      context?.setCodeSnippet(updatedSnippetData);
-      context.setTrashData(updatedTrash);
-    }
+  const moveToTrash = (data: any) => {
+    context?.setShowDeleteModal(true);
+    context?.setAgreeToDelete(false);
   };
 
   const addToFavorite = (id: number) => {
@@ -40,6 +34,7 @@ const CodeSnippetListing: React.FC<CodeSnippetListingProps> = ({ data }) => {
       context.setCodeSnippet(updatedSnippetData);
     }
   };
+  console.log('item aaya kya',data)
   return (
     <>
       <section className="flex flex-wrap">
@@ -50,9 +45,17 @@ const CodeSnippetListing: React.FC<CodeSnippetListingProps> = ({ data }) => {
                  ${context?.darkTheme ? "bg-white" : "bg-[#1E293B]"}`}
           >
             <div className="flex justify-between pt-4">
-              <span className={` ${context?.darkTheme ? "text-black" :"text-white"}`}>{item?.title}</span>
               <span
-                className={`cursor-pointer ${context?.darkTheme ? "text-black" :"text-white"}`}
+                className={` ${
+                  context?.darkTheme ? "text-black" : "text-white"
+                }`}
+              >
+                {item?.title}
+              </span>
+              <span
+                className={`cursor-pointer ${
+                  context?.darkTheme ? "text-black" : "text-white"
+                }`}
                 onClick={() => addToFavorite(item.id)}
               >
                 <FaRegHeart
@@ -60,16 +63,29 @@ const CodeSnippetListing: React.FC<CodeSnippetListingProps> = ({ data }) => {
                 />
               </span>
             </div>
-            <span className={` ${context?.darkTheme ? "text-black" :"text-white"}`}>{item?.date}</span>
+            <span
+              className={` ${context?.darkTheme ? "text-black" : "text-white"}`}
+            >
+              {item?.date}
+            </span>
             <div className="flex justify-between">
-              <span className={` ${context?.darkTheme ? "text-black" :"text-white"}`}>{item?.lang}</span>
               <span
-                className={`cursor-pointer ${context?.darkTheme ? "text-black" :"text-white"}`}
-                onClick={() => moveToTrash(item?.id)}
+                className={` ${
+                  context?.darkTheme ? "text-black" : "text-white"
+                }`}
+              >
+                {item?.lang}
+              </span>
+              <span
+                className={`cursor-pointer ${
+                  context?.darkTheme ? "text-black" : "text-white"
+                }`}
+                onClick={() => moveToTrash(item)}
               >
                 <RiDeleteBin6Line />
               </span>
             </div>
+            {!!context?.showDeleteModal && <DialogBox data={item} />}
           </div>
         ))}
       </section>
